@@ -39,3 +39,14 @@ restart_charger:
     charger_id:
       description: "The charger id"
       example: "yyyyyyyy-9999-99xx-xxx-yyyyyyyyyyyy"
+
+set_max_current:
+  description: "Set max charging current"
+  fields:
+    installation_id:
+      description: "The installation id"
+      example: "yyyyyyyy-xxxx-xxxx-xxxx-yyyyyyyyyyyy"
+    max_current:
+      description: "Max charger current in amps"
+      example: 32
+

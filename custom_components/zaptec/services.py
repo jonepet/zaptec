@@ -53,6 +53,12 @@ async def async_setup_services(hass):
         charger_id = service_call.data["charger_id"]
         return await acc.map[charger_id].update_firmware()
 
+    async def service_set_max_current(service_call):
+        _LOGGER.debug("service update_charger_configuration")
+        installation_id = service_call.data["installation_id"]
+        max_current = service_call.data["max_current"]
+        return await acc.map[installation_id].limit_amps(AvailableCurrentPhase1=max_current,AvailableCurrentPhase2=max_current,AvailableCurrentPhase3=max_current)
+
     hass.services.async_register(
         DOMAIN, "stop_pause_charging", service_handle_stop_pause, schema=has_id_schema
     )
@@ -76,3 +82,8 @@ async def async_setup_services(hass):
     hass.services.async_register(
         DOMAIN, "update_firmware", service_handle_update_firmware, schema=has_id_schema
     )
+
+    hass.services.async_register(
+        DOMAIN, "set_max_current", service_set_max_current, schema=max_current_schema
+    )
+
